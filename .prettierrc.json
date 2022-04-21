@@ -1,0 +1,20 @@
+{
+    "printWidth": 140,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "semi": true,
+    "trailingComma": "all",
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "useTabs": false,
+    "jsxSingleQuote": true,
+    "overrides": [
+        {
+            "files": "*.{js,jsx,tsx,ts,scss,json,html}",
+            "options": {
+                "tabWidth": 4
+            }
+        }
+    ]
+}
