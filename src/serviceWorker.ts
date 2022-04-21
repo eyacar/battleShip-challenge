@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-use-before-define */
+/* eslint-disable no-magic-numbers */
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
