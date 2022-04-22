@@ -11,6 +11,6 @@ export const boardSlice = createSlice({
     },
 });
 
-export const { addPlayerFieldState } = boardSlice.actions;
+export const { addPlayerFieldState, addCpuFieldState } = boardSlice.actions;
 
 export default boardSlice.reducer;

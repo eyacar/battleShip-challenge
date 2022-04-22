@@ -1,8 +1,8 @@
 import { BOARD } from './interfaces';
 
 const initialState: BOARD = {
-    player: {},
-    cpu: {},
+    playerFields: {},
+    cpuFields: {},
 };
 
 export default initialState;

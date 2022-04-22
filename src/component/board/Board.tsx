@@ -6,7 +6,7 @@ interface BoardProps {
     columns: string[]; // Columns we ar going to get on the board.
     rowsAmount: number; // The amount of Rows we want for the board.
     isPlayer?: boolean; // If the board is for the player or not.
-    handleOnclick: (field: string, isPlayer: boolean) => void; // The function that will be called when a field is clicked.
+    handleOnclick: (field: string) => void; // The function that will be called when a field is clicked.
 }
 
 const Board: React.FC<BoardProps> = ({ columns, rowsAmount, isPlayer = false, handleOnclick }) => {
