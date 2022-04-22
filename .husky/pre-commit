@@ -3,3 +3,4 @@
 
 npm run prettier
 eslint . --max-warnings=0
+npm test
