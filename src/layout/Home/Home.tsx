@@ -1,12 +1,14 @@
 import React from 'react';
 import Board from '../../component/board/Board';
+import { useAppDispatch } from '../../hook/reduxHooks';
+import { addPlayerFieldState } from '../../store/board/';
 
 const Home = () => {
-    const [shipState, setShipState] = React.useState<Record<string, 'SHIP' | 'HIT' | 'DESTROYED' | 'MISSED'>>({});
+    const dispatch = useAppDispatch();
     const handleOnclick = (element: string) => {
-        setShipState((prevState) => ({ ...prevState, [element]: 'SHIP' }));
+        dispatch(addPlayerFieldState({ fieldName: element, fieldState: 'HIT' }));
     };
-    return <Board columns={['h', 'j', 'm']} rowsAmount={4} filedSituation={shipState} handleOnclick={handleOnclick} />;
+    return <Board columns={['h', 'j', 'm']} rowsAmount={4} handleOnclick={handleOnclick} isPlayer />;
 };
 
 export default Home;

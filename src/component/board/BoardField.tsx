@@ -1,21 +1,21 @@
 import React, { memo } from 'react';
+import { useAppSelector } from '../../hook/reduxHooks';
+import { FieldState } from '../../store/board/interfaces';
 
 import style from './boardField.module.scss';
 
 interface BoardFieldProps {
     fieldName: string;
     isPlayer: boolean;
-    color: Record<string, 'SHIP' | 'HIT' | 'DESTROYED' | 'MISSED'>;
     handleOnclick: (field: string, isPlayer: boolean) => void;
 }
 
-const BoardField: React.FC<BoardFieldProps> = ({ fieldName, isPlayer, handleOnclick, color }) => {
-    // TODO : if isPlayer the redux state is going to be the players if is not is going to be CPU's
+const BoardField: React.FC<BoardFieldProps> = ({ fieldName, isPlayer, handleOnclick }) => {
+    const fieldState: FieldState = useAppSelector((state) => (isPlayer ? state.board.player[fieldName] : state.board.cpu[fieldName]));
 
-    const colorElement: 'SHIP' | 'HIT' | 'DESTROYED' | 'MISSED' = color[fieldName];
     return (
         <td
-            className={colorElement ? style[`container--${colorElement}`] : style.container}
+            className={fieldState ? style[`container--${fieldState}`] : style.container}
             data-testid={fieldName}
             onClick={() => handleOnclick(fieldName, isPlayer)}
             onMouseEnter={() => console.log(fieldName, 'true')}
