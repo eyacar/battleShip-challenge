@@ -7,18 +7,25 @@ interface BoardProps {
     rowsAmount: number; // The amount of Rows we want for the board.
     isPlayer?: boolean; // If the board is for the player or not.
     handleOnclick: (field: string) => void; // The function that will be called when a field is clicked.
+    handleHover?: (field: string, type: 'on' | 'off') => void;
 }
 
-const Board: React.FC<BoardProps> = ({ columns, rowsAmount, isPlayer = false, handleOnclick }) => {
+const Board: React.FC<BoardProps> = ({ columns, rowsAmount, isPlayer = false, handleOnclick, handleHover }) => {
     return (
         <table style={{ borderCollapse: 'collapse' }}>
             <tbody>
                 {columns.map((column) => (
-                    <tr key={hash(column)}>
+                    <tr data-testid={column} key={hash(column)}>
                         {Array(rowsAmount)
                             .fill(' ')
                             .map((_, i) => (
-                                <BoardField key={hash(i)} fieldName={column + i} handleOnclick={handleOnclick} isPlayer={isPlayer} />
+                                <BoardField
+                                    key={hash(i)}
+                                    fieldName={column + i}
+                                    handleOnclick={handleOnclick}
+                                    isPlayer={isPlayer}
+                                    {...handleHover}
+                                />
                             ))}
                     </tr>
                 ))}
