@@ -1,5 +1,8 @@
-import { Board } from './interfaces';
+import { BOARD } from './interfaces';
 
-const initialState: Board = {};
+const initialState: BOARD = {
+    playerFields: {},
+    cpuFields: {},
+};
 
 export default initialState;

@@ -1,4 +1,5 @@
-export interface Board {
-    player?: Record<string, string>;
-    cpu?: Record<string, string>;
+export type FieldState = 'SHIP' | 'HIT' | 'DESTROYED' | 'MISSED';
+export interface BOARD {
+    playerFields: Record<string, FieldState>;
+    cpuFields: Record<string, FieldState>;
 }
