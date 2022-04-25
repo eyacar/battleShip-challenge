@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+
+    &__button_container {
+        margin: 20px;
+        text-align: center;
+
+        &__buttons {
+            margin-left: 15px;
+            margin-bottom: 10px;
+            height: 35px;
+            background-color: chartreuse;
+            border-radius: 20%;
+        }
+    }
+}
