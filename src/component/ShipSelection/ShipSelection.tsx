@@ -9,7 +9,7 @@ export type Ships = 'carrier' | 'cruisers' | 'submarine';
 
 interface ShipSelectionProps {
     shipName: Ships;
-    handleSelection: (selectedShip: Ships, amountOfSpace: number, position: string) => void;
+    handleSelection: (selectedShip: Ships, amountOfSpace: number, position: 'vertical' | 'horizontal') => void;
 }
 
 const ShipSelection: React.FC<ShipSelectionProps> = ({ shipName, handleSelection }) => {
@@ -31,14 +31,16 @@ const ShipSelection: React.FC<ShipSelectionProps> = ({ shipName, handleSelection
             <div className={style.container__button_container}>
                 <h2>{shipName}</h2>
                 <button
-                    onClick={() => handleSelection(shipName, amountOfSpaceData.carrier, 'vertical')}
-                    className={style.container__button_container__buttons}
+                    data-testid={shipName + '-vertical'}
+                    onClick={() => handleSelection(shipName, amountOfSpaceData[shipName], 'vertical')}
+                    className={style.container__button_container__buttons + ' btn btn-outline-dark'}
                 >
                     Vertical
                 </button>
                 <button
-                    onClick={() => handleSelection(shipName, amountOfSpaceData.carrier, 'horizontal')}
-                    className={style.container__button_container__buttons}
+                    data-testid={shipName + '-horizontal'}
+                    onClick={() => handleSelection(shipName, amountOfSpaceData[shipName], 'horizontal')}
+                    className={style.container__button_container__buttons + ' btn btn-outline-dark'}
                 >
                     Horizontal
                 </button>

@@ -17,13 +17,14 @@ beforeEach(() =>
 );
 
 test('renders a board field and column', () => {
+    expect(screen.getByTestId('m'));
     expect(screen.getByTestId('h'));
-    expect(screen.getByTestId('h3'));
+    expect(screen.getByTestId('h3-field'));
     expect(screen.getByTestId('j'));
-    expect(screen.getByTestId('j2'));
+    expect(screen.getByTestId('j2-field'));
 });
 
 test('clicking on a field', () => {
-    fireEvent.click(screen.getByTestId('h3'));
+    fireEvent.click(screen.getByTestId('h3-field'));
     expect(screen.getByTestId('clicked-h3'));
 });

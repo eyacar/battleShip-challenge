@@ -4,25 +4,30 @@
     height: 40px;
 }
 
+@mixin backgroundColor($color) {
+    background-color: $color;
+    border: none;
+}
+
 .container {
     @include field;
     &--SHIP {
         @include field;
-        background-color: grey;
+        @include backgroundColor(grey);
     }
 
     &--HIT {
         @include field;
-        background-color: orange;
+        @include backgroundColor(orange);
     }
 
     &--DESTROYED {
         @include field;
-        background-color: red;
+        @include backgroundColor(red);
     }
 
     &--MISSED {
         @include field;
-        background-color: lightblue;
+        @include backgroundColor(lightblue);
     }
 }

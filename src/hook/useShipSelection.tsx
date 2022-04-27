@@ -5,15 +5,16 @@ import ShipSelection, { Ships } from '../component/ShipSelection/ShipSelection';
 
 import style from './style/shipSelectionPortal.module.scss';
 
+type POSITION = 'vertical' | 'horizontal';
 interface ShipsPlayerCouldAdd {
     carrier: number;
     cruisers: number;
     submarine: number;
 }
 
-interface Selected {
+export interface Selected {
     shipName: string;
-    position: string;
+    position: POSITION;
     amountOfFields: number;
     shipType: string;
 }
@@ -37,17 +38,17 @@ export default function useShipSelection() {
 
     const handleOpenSelectionModal = () => {
         // For opening the modal
-        if (!selection || selection === 'initialState' || selection === 'No More Ships to select') {
+        if (!selection || selection === 'initialState') {
             setIsOpened(true);
         }
     };
 
     const handleSelection = useCallback(
-        (selectedShip: Ships, amountOfSpace: number) => {
+        (selectedShip: Ships, amountOfSpace: number, position: POSITION) => {
             // This handler set the selected state of what the player wants to add.
             setSelection({
                 shipName: selectedShip + shipsPlayerCouldAdd[selectedShip],
-                position: '',
+                position: position,
                 amountOfFields: amountOfSpace,
                 shipType: selectedShip,
             });
@@ -82,18 +83,18 @@ export default function useShipSelection() {
 
     const addWarning = useMemo(() => {
         if (selection === 'No More Ships to select') {
-            return <div>No More Ships to select</div>;
+            return <div data-testid='add warning'>No More Ships to select</div>;
         } else if (selection && selection !== 'initialState') {
-            return <div>Add {selection.shipType} before doing a new selection</div>;
+            return <div data-testid='add warning'>Add {selection.shipType} before doing a new selection</div>;
         }
     }, [selection]);
 
     const modal =
         isOpened &&
         createPortal(
-            <div className={style.container}>
+            <div className={style.container} data-testid='selection modal'>
                 <div className={style.container__modal}>
-                    <span onClick={() => setIsOpened(false)} className={style.container__modal__close}>
+                    <span data-testid='close modal' onClick={() => setIsOpened(false)} className={style.container__modal__close}>
                         X
                     </span>
                     <h2>Choose your next selection:</h2>

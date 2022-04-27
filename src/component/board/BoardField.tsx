@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { useAppSelector } from '../../hook/reduxHooks';
-import { FieldState } from '../../store/board/interfaces';
+import { FieldSituation } from '../../store/board/interfaces';
 
 import style from './boardField.module.scss';
 
@@ -12,9 +12,9 @@ interface BoardFieldProps {
 }
 
 const BoardField: React.FC<BoardFieldProps> = ({ fieldName, isPlayer, handleOnclick, handleHover }) => {
-    const fieldState: FieldState = useAppSelector((state) =>
-        isPlayer ? state.board.playerFields[fieldName] : state.board.cpuFields[fieldName],
-    );
+    const boardState: 'playerFields' | 'cpuFields' = isPlayer ? 'playerFields' : 'cpuFields';
+
+    const fieldState: FieldSituation = useAppSelector((state) => state.board[boardState][fieldName]?.situation);
 
     const onHover = (type: 'on' | 'off') => {
         if (handleHover) {
@@ -26,7 +26,7 @@ const BoardField: React.FC<BoardFieldProps> = ({ fieldName, isPlayer, handleOncl
         <td
             className={fieldState ? style[`container--${fieldState}`] : style.container}
             id={fieldName}
-            data-testid={fieldName}
+            data-testid={fieldName + '-field'}
             onClick={() => handleOnclick(fieldName)}
             onMouseEnter={() => onHover('on')}
             onMouseLeave={() => onHover('off')}
