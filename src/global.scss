@@ -10,3 +10,20 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.header {
+    text-align: center;
+    margin: 10px;
+}
+
+.rules {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 15px;
+    margin-bottom: -30px;
+
+    @media screen and (max-width: 600px) {
+        margin-bottom: -10px;
+    }
+}

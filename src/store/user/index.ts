@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import initialState from './initialState';
 import * as reducers from './reducers';
 
-export const boardSlice = createSlice({
-    name: 'board',
+export const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers,
     extraReducers: (builder) => {
@@ -11,6 +11,6 @@ export const boardSlice = createSlice({
     },
 });
 
-export const { addPlayerShips, addCpuShips, addPlayerShipFields, addPlayerHoverState } = boardSlice.actions;
+export const { addUserName } = userSlice.actions;
 
-export default boardSlice.reducer;
+export default userSlice.reducer;

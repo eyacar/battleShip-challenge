@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    &__table {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__title {
+        &--warning {
+            color: red;
+        }
+    }
+
+    &__start {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        &__input {
+            width: 300px;
+        }
+        &__button {
+            width: 200px;
+        }
+    }
+}
