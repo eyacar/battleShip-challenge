@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Board from '../../component/board/Board';
 import { useAppDispatch, useAppSelector } from '../../hook/reduxHooks';
-import { addPlayerShips, addCpuShips, addPlayerHoverState, addPlayerShipFields } from '../../store/board/';
+import { addPlayerShips, addCpuShips, addPlayerHoverState, addPlayerShipFields, addCpuBoard } from '../../store/board/';
 import { addUserName } from '../../store/user/';
 import useShipSelection from '../../hook/useShipSelection';
 import BoardHelper from '../../helper/BoardHelper';
@@ -15,7 +15,7 @@ const rows = 10;
 
 const Home = () => {
     const dispatch = useAppDispatch();
-    const { playerFields, cpuFields } = useAppSelector((state) => state.board);
+    const { playerFields, cpuMatchBoard } = useAppSelector((state) => state.board);
     const [playerName, setPlayerName] = useState<string>('');
     const [selectedFields, setSelectedFields] = useState<Record<string, FieldState>>({});
     const [hoverStatus, setHoverStatus] = useState<Record<string, FieldState> | null>(null);
@@ -54,6 +54,7 @@ const Home = () => {
             const helper = new CpuBoardHelper(columns, rows);
             const fields = helper.createBoard();
             dispatch(addCpuShips(fields));
+            dispatch(addCpuBoard({ columns, rows }));
         }
     }, [dispatch, selection]);
 
@@ -67,7 +68,13 @@ const Home = () => {
         } else {
             return (
                 <>
-                    <button type='button' className='btn btn-outline-info' onClick={handleOpenSelectionModal} data-testid='Add a Ship'>
+                    <button
+                        type='button'
+                        className='btn btn-outline-info'
+                        onClick={handleOpenSelectionModal}
+                        data-testid='Add a Ship'
+                        disabled={Boolean(addWarning)}
+                    >
                         Add a Ship
                     </button>
                     <h5>{addWarning}</h5>
@@ -79,7 +86,7 @@ const Home = () => {
     const startButton = useMemo(() => {
         // eslint-disable-next-line no-magic-numbers
         const hasFields = (fieldsObject: Record<string, FieldState>) => Object.keys(fieldsObject).length > 0;
-        const isReadyToPlay = Boolean(playerName) && hasFields(playerFields) && hasFields(cpuFields); // When user made a choice of ships, ad the name and Cpu ships are set you can start playing.
+        const isReadyToPlay = Boolean(playerName) && hasFields(playerFields) && hasFields(cpuMatchBoard.cpuFields); // When user made a choice of ships, ad the name and Cpu ships are set you can start playing.
         return (
             <button
                 className={style.container__start__button + ' btn btn-outline-success'}
@@ -91,7 +98,7 @@ const Home = () => {
                 START GAME
             </button>
         );
-    }, [cpuFields, dispatch, playerFields, playerName]);
+    }, [cpuMatchBoard.cpuFields, dispatch, playerFields, playerName]);
 
     return (
         <div className={style.container} data-testid='home'>

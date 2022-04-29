@@ -1,0 +1,33 @@
+.header {
+    text-align: center;
+    margin: 20px;
+    color: darkblue;
+}
+
+.winner {
+    display: flex;
+    flex-direction: column;
+
+    & > a {
+        width: 100px;
+        margin: auto;
+    }
+}
+
+.player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+
+    @media screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+        row-gap: 1em;
+    }
+}

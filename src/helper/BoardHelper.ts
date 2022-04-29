@@ -32,7 +32,7 @@ export default class BoardHelper {
         }
 
         // eslint-disable-next-line no-magic-numbers
-        if (position === 'horizontal' && Number(row) - 1 + amountOfFields <= rows) {
+        if (position === 'horizontal' && Number(row) - 1 + amountOfFields < rows) {
             // check first if the ship is in the board
             // row - 1 --> because in order to know the amount of rows you are going to need to subtract 1 from the initial row
             const fields = Array(amountOfFields)

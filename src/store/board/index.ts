@@ -11,6 +11,7 @@ export const boardSlice = createSlice({
     },
 });
 
-export const { addPlayerShips, addCpuShips, addPlayerShipFields, addPlayerHoverState } = boardSlice.actions;
+export const { addPlayerShips, addCpuShips, addPlayerShipFields, addPlayerHoverState, addPlayerMove, addCpuMove, addCpuBoard, clearState } =
+    boardSlice.actions;
 
 export default boardSlice.reducer;

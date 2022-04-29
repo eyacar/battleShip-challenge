@@ -40,7 +40,7 @@ const TestHome = () => {
                         {element}
                     </h1>
                 ))}
-            {userName && <h1 data-testid={'userName'}>{userName}</h1>}
+            <h1 data-testid='userName'>{userName && userName}</h1>
             <Home />
         </>
     );
@@ -90,6 +90,9 @@ describe('Home trying redux states', () => {
     });
 
     it('test Add Ship button', () => {
+        fireEvent.change(screen.getByTestId(/Add Name input/i), { target: { value: 'Eze' } });
+        fireEvent.click(screen.getByTestId('Start Game'));
+        expect(screen.getByTestId('userName').textContent).toBe('');
         fireEvent.click(screen.getByTestId('Add a Ship'));
         fireEvent.click(screen.getByTestId('submarine-horizontal'));
         expect(screen.getByTestId('add warning').textContent).toBe('Add submarine before doing a new selection');
