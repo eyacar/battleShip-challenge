@@ -15,7 +15,7 @@ describe('Board Helper', () => {
         expect(
             helper.createShip(3, 'horizontal', 'cruiser', {
                 columns: ['A', 'B', 'C'],
-                rows: 3,
+                rows: 4,
             }),
         ).toEqual({
             A1: { situation: 'SHIP', ship: 'cruiser' },

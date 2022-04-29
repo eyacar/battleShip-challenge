@@ -5,6 +5,12 @@ const initialState: BOARD = {
     cpuFields: {},
     playerShips: {},
     cpuShips: {},
+    cpuMatchBoard: {
+        cpuFields: {},
+        playerLeftFieldsBoard: [],
+    },
+    playerMoves: [],
+    cpuMoves: [],
 };
 
 export default initialState;

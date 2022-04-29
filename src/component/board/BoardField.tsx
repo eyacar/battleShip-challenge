@@ -26,7 +26,7 @@ const BoardField: React.FC<BoardFieldProps> = ({ fieldName, isPlayer, handleOncl
         <td
             className={fieldState ? style[`container--${fieldState}`] : style.container}
             id={fieldName}
-            data-testid={fieldName + '-field'}
+            data-testid={`${fieldName}-field${!isPlayer ? '-cpu' : ''}`}
             onClick={() => handleOnclick(fieldName)}
             onMouseEnter={() => onHover('on')}
             onMouseLeave={() => onHover('off')}

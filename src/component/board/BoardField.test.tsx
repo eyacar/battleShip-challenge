@@ -29,16 +29,16 @@ beforeEach(() =>
 );
 
 test('renders a board field and column', () => {
-    expect(screen.getByTestId('a1-field').textContent).toBe('');
-    expect(screen.getByTestId('a1-field').classList.contains('container')).toBe(true);
+    expect(screen.getByTestId('a1-field-cpu').textContent).toBe('');
+    expect(screen.getByTestId('a1-field-cpu').classList.contains('container')).toBe(true);
 });
 
 test('hovering on a field', () => {
-    fireEvent.mouseEnter(screen.getByTestId('a1-field'));
+    fireEvent.mouseEnter(screen.getByTestId('a1-field-cpu'));
     expect(screen.getByTestId('hover-a1'));
 });
 
 test('hovering off a field', () => {
-    fireEvent.mouseLeave(screen.getByTestId('a1-field'));
+    fireEvent.mouseLeave(screen.getByTestId('a1-field-cpu'));
     expect(screen.getByTestId('hover-off-a1'));
 });

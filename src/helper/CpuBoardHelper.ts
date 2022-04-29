@@ -78,9 +78,14 @@ export default class CpuBoardHelper {
 
         if (position === 'horizontal') {
             const initialField = this.fieldHorizontalShipCreator(column, row, 0, carrierName);
-            const secondField = this.fieldHorizontalShipCreator(column, row, 1, carrierName);
-            const thirdField = this.fieldHorizontalShipCreator(column, row, 2, carrierName);
-            const fourthField = this.fieldHorizontalShipCreator(column, row, 3, carrierName);
+            let secondField = this.fieldHorizontalShipCreator(column, row, 1, carrierName);
+            let thirdField = this.fieldHorizontalShipCreator(column, row, 2, carrierName);
+            let fourthField = this.fieldHorizontalShipCreator(column, row, 3, carrierName);
+
+            secondField = Number(secondField[1]) < 10 ? secondField : {};
+            thirdField = Number(thirdField[1]) < 10 ? thirdField : {};
+            fourthField = Number(fourthField[1]) < 10 ? fourthField : {};
+
             shipFields = this.createShip(type, { initialField, secondField, thirdField, fourthField });
         } else {
             // Vertical position
@@ -112,8 +117,11 @@ export default class CpuBoardHelper {
         if (shipType === 'carrier') {
             areNotUsedFields =
                 this.isUsedField(initialFieldName) &&
+                Boolean(secondFieldName) &&
                 this.isUsedField(secondFieldName) &&
+                Boolean(thirdFieldName) &&
                 this.isUsedField(thirdFieldName) &&
+                Boolean(fourthFieldName) &&
                 this.isUsedField(fourthFieldName);
 
             if (areNotUsedFields) {
@@ -129,7 +137,12 @@ export default class CpuBoardHelper {
                 };
             } else shipFields = {}; // if one is used is going to send an empty object.
         } else if (shipType === 'cruisers') {
-            areNotUsedFields = this.isUsedField(initialFieldName) && this.isUsedField(secondFieldName) && this.isUsedField(thirdFieldName);
+            areNotUsedFields =
+                this.isUsedField(initialFieldName) &&
+                Boolean(secondFieldName) &&
+                this.isUsedField(secondFieldName) &&
+                Boolean(thirdFieldName) &&
+                this.isUsedField(thirdFieldName);
 
             if (areNotUsedFields) {
                 this.fieldList = this.fieldList.filter(
@@ -143,7 +156,12 @@ export default class CpuBoardHelper {
             } else shipFields = {}; // if one is used is going to send an empty object.
         } else {
             // submarine
-            areNotUsedFields = this.isUsedField(initialFieldName) && this.isUsedField(secondFieldName);
+            areNotUsedFields =
+                this.isUsedField(initialFieldName) &&
+                Boolean(secondFieldName) &&
+                this.isUsedField(secondFieldName) &&
+                Boolean(thirdFieldName) &&
+                this.isUsedField(thirdFieldName);
 
             if (areNotUsedFields) {
                 this.fieldList = this.fieldList.filter((field) => field !== initialFieldName && field !== secondFieldName); // For getting off the used fields from the list.
